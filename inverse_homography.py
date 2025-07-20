@@ -33,7 +33,7 @@ def transform_point(pt, H):
 for slot in slot_data:
     bird_pts = slot["points"]
     original_pts = [transform_point(pt, H_inv) for pt in bird_pts]
-    cv2.polylines(original, [np.array(original_pts)], isClosed=True, color=(0, 0, 255), thickness=2)
+    cv2.polylines(original, [np.array(original_pts)], isClosed=True, color=(0, 255, 0), thickness=2)
 
 cv2.imshow("Original with Projected Slots", original)
 cv2.imwrite("original_with_slots.jpg", original)
