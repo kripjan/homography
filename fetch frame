@@ -1,0 +1,33 @@
+import cv2
+
+# Path to the input video
+video_path = 'input//entry.mp4'  # Change this to your actual video file path
+output_image_path = '10th_frame_from_last.jpg'
+
+# Open the video
+cap = cv2.VideoCapture(video_path)
+
+# Get total number of frames
+total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+# Calculate the target frame index
+target_frame_index = total_frames - 10
+
+if target_frame_index < 0:
+    print("Video is too short to extract the 10th frame from the end.")
+else:
+    # Set the video to the target frame
+    cap.set(cv2.CAP_PROP_POS_FRAMES, target_frame_index)
+
+    # Read the frame
+    ret, frame = cap.read()
+
+    if ret:
+        # Save the frame as an image
+        cv2.imwrite(output_image_path, frame)
+        print(f"Saved the 10th frame from the end to: {output_image_path}")
+    else:
+        print("Failed to read the frame.")
+
+# Release the video capture
+cap.release()

@@ -7,10 +7,10 @@ H = np.load("homography_matrix.npy")
 H_inv = np.linalg.inv(H)
 
 # Load top-down view image
-top_down = cv2.imread("top_down_view.jpg")
+top_down = cv2.imread("kec_homo.jpg")
 
 # Load original image (camera view)
-original = cv2.imread("copy.jpg")
+original = cv2.imread("kec.jpg")
 
 # Load slot rectangles from JSON
 with open("slots_points.json", "r") as f:
@@ -21,7 +21,7 @@ for slot in slot_data:
     cv2.polylines(top_down, [points], isClosed=True, color=(0, 255, 0), thickness=2)
 
 cv2.imshow("Top-down with Slots", top_down)
-cv2.imwrite("top_down_with_slots.jpg", top_down)
+cv2.imwrite("kec_down_with_slots.jpg", top_down)
 
 def transform_point(pt, H):
     pt_h = np.array([pt[0], pt[1], 1]).reshape(3, 1)
@@ -36,6 +36,6 @@ for slot in slot_data:
     cv2.polylines(original, [np.array(original_pts)], isClosed=True, color=(0, 255, 0), thickness=2)
 
 cv2.imshow("Original with Projected Slots", original)
-cv2.imwrite("original_with_slots.jpg", original)
+cv2.imwrite("kecorgi_with_slots.jpg", original)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

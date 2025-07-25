@@ -10,7 +10,7 @@ with open('src_points.json', 'r') as f:
 src_points = np.float32(data[0]['points'])
 
 # Define destination points (a clean top-down rectangle)
-W, H = 1200, 800  # You can change this based on your layout
+W, H = 700, 1600  # You can change this based on your layout
 dst_points = np.float32([
     [0, 0],
     [W, 0],
@@ -22,7 +22,7 @@ dst_points = np.float32([
 H_matrix, _ = cv2.findHomography(src_points, dst_points)
 
 # Load original image/frame
-img = cv2.imread('copy.jpg')  # Replace with your image path
+img = cv2.imread('kec.jpg')  # Replace with your image path
 
 # Warp perspective to get bird-eye view
 warped = cv2.warpPerspective(img, H_matrix, (W, H))
@@ -34,5 +34,5 @@ np.save("homography_matrix.npy", H_matrix)
 cv2.imshow("Bird Eye View", warped)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-cv2.imwrite('top_down_view.jpg', warped)
+cv2.imwrite('kec_homo.jpg', warped)
 
